@@ -24,6 +24,15 @@ module.exports = (io) => {
             }
         });
 
+        socket.on("disconnect", datos => {
+            if(!socket.nickname){
+                return;
+            }else{
+                nickNames.splice(nickNames.indexOf(socket.nickNames), 1);
+                io.sockets.emit("nombre usuario", nickNames);
+            }
+        })
+
     });
 
 
